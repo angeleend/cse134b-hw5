@@ -1,0 +1,64 @@
+:root {
+    --font-heading: 'Poppins', 'Inter', 'Avenir Next', Helvetica Neue, Arial, sans-serif;
+    --font-body: 'Raleway', 'Inter', 'Gill Sans', 'Open Sans', Verdana, sans-serif;
+    --white: #F7F7F2;
+    --black: #121113;
+}
+
+* {
+    background-color: var(--white);
+}
+
+body{
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    color: var(--black);
+}
+
+p {
+    font-family: var(--font-body);
+}
+
+nav a {
+    font-family: var(--font-body);
+    text-decoration: none;
+}
+    
+nav ul {
+    display: flex; 
+    padding: 1rem 0;
+    margin: 0;         
+    gap: 1rem; 
+
+    font-size: 1.2rem;
+    list-style: none; 
+}
+
+nav ul li:first-child a {
+    font-weight: 700; /* Make the first link bold */
+    font-size: 1.4rem; /* Make it slightly larger */
+    
+}
+
+nav #nav-start-right {
+    margin-left: auto; 
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    justify-content: center; 
+
+    min-height: 100vh;
+    margin: 0; 
+}
+
+iframe {
+    height: 90vh;
+    width: 90vw;
+}
