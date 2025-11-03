@@ -20,27 +20,27 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-    font-size: 4rem;
-    margin: 1rem 0;
+    font-size: 3.5rem;
+    margin: 1.5rem 0;
 }
 
 h2 {
-    font-size: 3.5rem;
+    font-size: 3rem;
     margin: 0.75rem 0;
 }
 
 h3 {
-    font-size: 3rem;
+    font-size: 2.5rem;
     margin: 0.5rem 0;
 }
 
 h4 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     margin: 0.25rem 0;
 }
 
 p, a {
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 a { color: white;}
@@ -54,45 +54,47 @@ header {
     width: auto; 
 
     background-color: black;
-}
 
-nav {
-    width: 100%; 
-    margin: 0; 
-}
+    nav {
+        width: 100%; 
+        margin: 0; 
 
-nav a {
-    text-decoration: none;
-    color: white;
-    font-size: 1.2rem;
-}
+        & a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2rem;
 
-nav a:hover {
-    text-decoration: underline;
-    color: white;
-}
+            &:hover {
+                text-decoration: underline;
+                color: white;
+            }
 
-nav a:visited {
-    color: pink;
-}
-    
-nav ul {
-    display: flex; 
-    padding: 1.5rem 5rem;
-    margin: 0;         
-    gap: 1rem; 
+            &:visited {
+                color: pink;
+                text-emphasis-style: bold;
+            }
+        }
 
-    font-size: 1.2rem;
-    list-style: none; 
-}
+        & ul {
+            display: flex; 
+            padding: 1.5rem 5rem;
+            margin: 0;         
+            gap: 1rem; 
 
-nav ul li:first-child a {
-    font-weight: 700;
-    font-size: 1.4rem; 
-}
+            font-size: 1.2rem;
+            list-style: none; 
 
-nav #nav-start-right {
-    margin-left: auto; 
+
+            & #nav-start-right {
+                margin-left: auto; 
+            }
+        }
+
+        & li:first-child a {
+            font-weight: 700;
+            font-size: 1.4rem; 
+        }
+    }
 }
 
 main {
@@ -117,17 +119,10 @@ ul {
     font-size: 1.5rem;
 }
 
-.horiztonal {
+.horizontal {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
-    gap: 2rem;
-}
-
-.vertical {
-    display: flex;
-    flex-direction: column;
     justify-content: center;
     gap: 2rem;
 }
@@ -175,18 +170,16 @@ time {
     align-items: center;
     justify-content: center;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 2rem;
-    padding: 0 5rem;
-    margin: 0;
-    width: 100%;
+    gap: 1.5rem;
 }
 
 .skill-item, .contact-item {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center; 
-
-    padding: 1rem;
+    aspect-ratio: 1 / 1;
+    padding: 0.5rem;
     border: 1px solid black;
 }
 
@@ -201,20 +194,22 @@ time {
     color: white;
 }
 
-#about div {
-    display: flex; 
-    gap: 2rem; 
-}
-
 #about .horizontal {
-    display: flex;
+    display: flex; 
     flex-direction: row;
-    align-items: baseline;
+    align-items: center;
     justify-content: space-between;
     gap: 1.5rem;
 }
 
+#about div {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+}
+
 iframe {
+    align-self: center;
     height: 90vh;
     width: 90vw;
 }
