@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Form No JS</title>
+        <link rel="stylesheet" href="fonts/archivo-narrow/an.css">
+        <link rel="stylesheet" href="fonts/general-sans/gs.css">
+        <style>
+            :root {
+                --font-heading: 'Archivo Narrow', 'Inter', 'Avenir Next', Helvetica Neue, Arial, sans-serif;
+                --font-body: 'General Sans', 'Inter', 'Gill Sans', 'Open Sans', Verdana, sans-serif;
+                --seashell: #f8f7ed;
+                --black: #121113;
+                --brown: #1D120B;
+                --mint: #bbdccf;
+            }
+
+            body {
+                margin: 2rem 4rem;
+                font-family: var(--font-body);
+                background-color: var(--seashell);
+                color: var(--brown);
+            }
+
+            main { 
+                &  h1{
+                    font-family: var(--font-heading);
+                    font-size: 3.5rem;
+                    margin: 1.5rem 0;
+                }
+
+                & form {
+                    border: 1px solid var(--black);
+                    background-color: var(--mint);
+                    padding: 2.5rem;
+
+                    & fieldset {
+                        border: none;
+                        padding: 0;
+                        margin: 0;
+
+                        & legend {
+                            font-size: 1.5rem;
+                            font-weight: 700;
+                            margin-bottom: 1rem;
+                            padding: 0;
+                        }
+
+                        & label {
+                            font-size: 1.2rem;
+                            margin-bottom: 0.5rem;
+                            font-family: var(--font-heading);
+                        }
+
+                        & input, textarea {
+                            border: 1px solid var(--brown);
+                            border-bottom: 1px solid var(--black);
+                            padding: 0.75rem 0.5rem;
+                            font-family: var(--font-body);
+                            font-size: 1.1rem;
+                            background-color: transparent; 
+                            color: var(--brown);
+                            width: 100%;
+                            margin-bottom: 1rem;
+                        }
+
+                        & textarea {
+                            resize: vertical;
+                        }
+                    }
+                    
+                    & #send-message {
+                        background-color: var(--seashell);
+                        color: var(--brown);
+                        border: 1px solid var(--brown);
+                        transition: transform 0.2s ease-out;
+
+                        &:hover {
+                            background-color: var(--brown);
+                            color: var(--seashell);
+                            cursor: pointer;
+                        }
+                    }
+
+                    & button {
+                        width: 100%;
+                        margin: 1rem 0;
+                        padding: 1rem;
+                        background-color: var(--brown);
+                        color: var(--seashell);
+                        border: none;
+                        font-size: 1.5rem;
+                        font-family: var(--font-body);
+                        border: 1px solid var(--brown);
+                        transition: transform 0.2s ease-out;
+
+                        &:hover {
+                            background-color: var(--mint);
+                            color: var(--brown);
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <main>
+            <h1>Contact Me</h1>
+            <form action="https://httpbin.org/post" method="POST">
+                <input type="hidden" id="possible_bot" name="possible_bot" value="true">
+                <fieldset id="contact-form">
+                    <legend>Contact Info</legend>
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required>
+                 
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+              
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" rows="6" required></textarea>
+                </fieldset>
+                <button id="send-message" type="submit">Send Message</button>
+            </form>
+        </main>
+    </body>
+</html>
