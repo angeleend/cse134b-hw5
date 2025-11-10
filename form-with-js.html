@@ -128,5 +128,17 @@
                 <output id="info" name="info"></output>
             </form>
         </main>
-    </body>
+
+        <script>
+            const name= document.getElementById('name');
+
+            name.addEventListener('input', function() {
+                const pattern = /^[A-Za-z\s.'\-]+$/;
+                if (!pattern.test(name.value)) {
+                    name.setCustomValidity('Please enter a valid name (letters, spaces, apostrophes, periods, and hyphens only).');
+                } else {
+                    name.setCustomValidity('');
+                }
+            });
+        </script>
 </html>
