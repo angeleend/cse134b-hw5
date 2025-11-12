@@ -3,28 +3,13 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Form No JS</title>
+        <title>Form With JS</title>
         <link rel="stylesheet" href="fonts/archivo-narrow/an.css">
         <link rel="stylesheet" href="fonts/general-sans/gs.css">
         <style>
-            :root {
-                --font-heading: 'Archivo Narrow', 'Inter', 'Avenir Next', Helvetica Neue, Arial, sans-serif;
-                --font-body: 'General Sans', 'Inter', 'Gill Sans', 'Open Sans', Verdana, sans-serif;
-                --seashell: #f8f7ed;
-                --black: #121113;
-                --brown: #1D120B;
-                --mint: #bbdccf;
-            }
-
-            body {
-                margin: 2rem 4rem;
-                font-family: var(--font-body);
-                background-color: var(--seashell);
-                color: var(--brown);
-            }
-
             main { 
-                &  h1{
+                align-items: center;
+                &  h1 {
                     font-family: var(--font-heading);
                     font-size: 3.5rem;
                     margin: 1.5rem 0;
@@ -82,28 +67,8 @@
                             cursor: pointer;
                         }
                     }
-
-                    & button {
-                        width: 100%;
-                        margin: 1rem 0;
-                        padding: 1rem;
-                        background-color: var(--brown);
-                        color: var(--seashell);
-                        border: none;
-                        font-size: 1.5rem;
-                        font-family: var(--font-body);
-                        border: 1px solid var(--brown);
-                        transition: transform 0.2s ease-out;
-
-                        &:hover {
-                            background-color: var(--mint);
-                            color: var(--brown);
-                            cursor: pointer;
-                        }
-                    }
                 }
             }
-
         </style>
     </head>
 
@@ -131,14 +96,22 @@
 
         <script>
             const name= document.getElementById('name');
+            const error = document.getElementById('error');
+            const info = document.getElementById('info');
 
             name.addEventListener('input', function() {
                 const pattern = /^[A-Za-z\s.'\-]+$/;
-                if (!pattern.test(name.value)) {
-                    name.setCustomValidity('Please enter a valid name (letters, spaces, apostrophes, periods, and hyphens only).');
+                if (name.validity.patternMismatch) {
+                    const errorMessage = 'Name can only contain letters, spaces, periods, apostrophes, and hyphens.';
+                    name.setCustomValidity(errorMessage);
+                    error.textContent = name.validationMessage;
+                    info.textContent = '';
                 } else {
                     name.setCustomValidity('');
+                    error.textContent = '';
+                    info.textContent = '';
                 }
             });
         </script>
+    </body>
 </html>
