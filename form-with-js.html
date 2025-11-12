@@ -6,11 +6,12 @@
         <title>Form With JS</title>
         <link rel="stylesheet" href="fonts/archivo-narrow/an.css">
         <link rel="stylesheet" href="fonts/general-sans/gs.css">
+        <link rel="stylesheet" href="styles/main.css">
         <style>
             body {
                 margin: 1rem 3rem;
             }
-            
+
             main { 
                 align-items: center;
                 &  h1 {
@@ -79,9 +80,10 @@
     <body>
         <main>
             <h1>Contact Me</h1>
-            <form action="https://httpbin.org/post" method="POST">
+            <form id="contact-form"action="https://httpbin.org/post" method="POST" >
                 <input type="hidden" id="possible_bot" name="possible_bot" value="true">
-                <fieldset id="contact-form">
+                <input type="hidden" id="form-errors" name="form-errors" value="">
+                <fieldset>
                     <legend>Contact Info</legend>
                         <label for="name">Name:</label>
                         <input type="text" id="name" name="name" pattern="^[A-Za-z\s.'\-]+$" minLength="3" maxLength="100" required>
@@ -90,7 +92,7 @@
                         <input type="email" id="email" name="email" minLength="3"required>
               
                         <label for="message">Message:</label>
-                        <textarea id="message" name="message" maxlength="500" rows="6" required></textarea>
+                        <textarea id="message" name="message" minlength="1" maxlength="350" rows="6" required></textarea>
                 </fieldset>
                 <button id="send-message" type="submit">Send Message</button>
                 <output id="error" name="error"></output>
@@ -99,23 +101,139 @@
         </main>
 
         <script>
-            const name= document.getElementById('name');
-            const error = document.getElementById('error');
-            const info = document.getElementById('info');
+            let name= document.getElementById('name');
+            let email = document.getElementById('email');
+            let message = document.getElementById('message');
+            let form = document.getElementById('contact-form');
+            let error = document.getElementById('error');
+            let info = document.getElementById('info');
+            let formErrorsInput = document.getElementById('form-errors');
 
+            let form_errors = [];
+            let validTimeout;
+
+
+            // NAME VALIDATION
             name.addEventListener('input', function() {
-                const pattern = /^[A-Za-z\s.'\-]+$/;
+                clearTimeout(validTimeout);
+                error.textContent = '';
+                info.textContent = '';
+
                 if (name.validity.patternMismatch) {
-                    const errorMessage = 'Name can only contain letters, spaces, periods, apostrophes, and hyphens.';
+                    addError('name', 'patternMismatch');
+
+                    let errorMessage = 'No special characters please! Only enter letters, spaces, periods, apostrophes, and hyphens for your name.';
                     name.setCustomValidity(errorMessage);
                     error.textContent = name.validationMessage;
-                    info.textContent = '';
+
+                    validTimeout = setTimeout(() => {
+                        error.textContent = '';
+                    }, 4000);
+
+                } else if (name.checkValidity() == false) {
+                    addError('name', 'lengthError');
+
+                    let errorMessage = 'Your name must be between 3 and 100 characters long.';
+                    name.setCustomValidity(errorMessage);
+                    error.textContent = name.validationMessage;
+
+                    validTimeout = setTimeout(() => {
+                        error.textContent = '';
+                    }, 4000);
+
                 } else {
-                    name.setCustomValidity('');
-                    error.textContent = '';
-                    info.textContent = '';
+                    info.textContent = 'Your name looks great!';
+
+                    validTimeout = setTimeout(() => {
+                        info.textContent = '';
+                    }, 4000);
+                }
+
+                name.setCustomValidity('');
+            });
+
+            // EMAIL VALIDATION
+            email.addEventListener('input', function() {
+                clearTimeout(validTimeout);
+                error.textContent = '';
+                info.textContent = '';
+
+                if (email.checkValidity() == false) {
+                    addError('email', 'lengthError');
+
+                    let errorMessage = 'Your email address seems to be too short to be a valid email, please ensure it is correct.';
+                    email.setCustomValidity(errorMessage);
+                    error.textContent = email.validationMessage;
+
+                    validTimeout = setTimeout(() => {
+                        error.textContent = '';
+                    }, 4000);
+
+                } else {
+                    info.textContent = 'Your email looks great!';
+
+                    validTimeout = setTimeout(() => {
+                        info.textContent = '';
+                    }, 4000);
+                }
+
+                email.setCustomValidity('');
+            });
+
+            // MESSAGE VALIDATION
+            message.addEventListener('input', charsLeft);
+
+            function charsLeft() {
+                clearTimeout(validTimeout);
+                error.textContent = '';
+                info.textContent = '';
+
+                let charsRemaining = message.maxLength - message.value.length;
+
+                if (charsRemaining < 10) {
+                    message.style.backgroundColor = '#6F857D';
+                    message.style.color = 'var(--seashell)';
+                    message.style.fontWeight = '500';
+
+                    addError('message', 'lengthError');
+
+                    let errorMessage = `Your message is getting close to the maximum character limit. You have ${charsRemaining} characters remaining.`;
+                    message.setCustomValidity(errorMessage);
+                    error.textContent = message.validationMessage;
+
+                    validTimeout = setTimeout(() => {
+                        error.textContent = '';
+                    }, 4000);
+
+                } else {
+                    message.style.backgroundColor = 'var(--mint)';
+                    message.style.color = 'var(--brown)';
+                    message.style.fontWeight = '400';
+                    info.textContent = `${charsRemaining} characters remaining`;
+
+                    validTimeout = setTimeout(() => {
+                        info.textContent = '';
+                    }, 4000);
+                }
+
+                message.setCustomValidity('');
+            }
+
+            // USER ERRORS
+            form.addEventListener('submit', function(event) {
+                if (form_errors.length > 0) {
+                    formErrorsInput.value = JSON.stringify(form_errors);
                 }
             });
+
+            function addError(fieldName, errorType) {
+                const fieldError = {
+                    field: fieldName,
+                    error: errorType
+                };
+
+                form_errors.push(fieldError);
+            }
         </script>
     </body>
 </html>

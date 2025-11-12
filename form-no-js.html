@@ -81,9 +81,9 @@
     <body>
         <main>
             <h1>Contact Me</h1>
-            <form action="https://httpbin.org/post" method="POST">
+            <form id="contact-form" action="https://httpbin.org/post" method="POST">
                 <input type="hidden" id="possible_bot" name="possible_bot" value="true">
-                <fieldset id="contact-form">
+                <fieldset>
                     <legend>Contact Info</legend>
                         <label for="name">Name:</label>
                         <input type="text" id="name" name="name" pattern="^[A-Za-z\s.'\-]+$" minLength="3" maxLength="100" required>
@@ -92,7 +92,7 @@
                         <input type="email" id="email" name="email" minLength="3"required>
               
                         <label for="message">Message:</label>
-                        <textarea id="message" name="message" maxlength="500" rows="6" required></textarea>
+                        <textarea id="message" name="message" minlength="1" maxlength="350" rows="6" required></textarea>
                 </fieldset>
                 <button id="send-message" type="submit">Send Message</button>
                 <output id="error" name="error"></output>
