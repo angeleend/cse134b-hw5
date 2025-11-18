@@ -10,19 +10,33 @@
         <style>
             body {
                 margin: 1rem 3rem;
+                font-family: var(--font-body);
+                background-color: var(--primary);
+                color: var(--text);
+
+                & header {
+                    padding: 0;
+                    background-color: transparent;
+                    
+                        & #mode-toggle {
+                        display: block;
+                        margin: 1rem 1rem 0 0;
+                        align-self: flex-start;
+                        font-size: 1.5rem;
+                    }
+                }
             }
-            
+
             main { 
                 align-items: center;
                 &  h1 {
-                    font-family: var(--font-heading);
                     font-size: 3.5rem;
                     margin: 1.5rem 0;
                 }
 
                 & form {
-                    border: 1px solid var(--black);
-                    background-color: var(--mint);
+                    border: 1px solid var(--text-alt);
+                    background-color: var(--accent);
                     padding: 2.5rem;
 
                     & fieldset {
@@ -31,6 +45,7 @@
                         margin: 0;
 
                         & legend {
+                            color: var(--primary);
                             font-size: 1.5rem;
                             font-weight: 700;
                             margin-bottom: 1rem;
@@ -41,18 +56,18 @@
                             font-size: 1.2rem;
                             margin-bottom: 0.5rem;
                             font-family: var(--font-heading);
+                            color: var(--primary);
                         }
 
                         & input, textarea {
-                            border: 1px solid var(--brown);
-                            border-bottom: 1px solid var(--black);
+                            border: 1px solid var(--primary);
+                            border-bottom: 1px solid var(--primary);
                             padding: 0.75rem 0.5rem;
                             font-family: var(--font-body);
                             font-size: 1.1rem;
                             background-color: transparent; 
-                            color: var(--brown);
+                            color: var(--primary);
                             width: 100%;
-                            margin-bottom: 1rem;
                         }
 
                         & textarea {
@@ -61,14 +76,14 @@
                     }
                     
                     & #send-message {
-                        background-color: var(--seashell);
-                        color: var(--brown);
-                        border: 1px solid var(--brown);
+                        background-color: var(--text);
+                        color: var(--primary);
+                        border: 1px solid var(--text);
                         transition: transform 0.2s ease-out;
 
                         &:hover {
-                            background-color: var(--brown);
-                            color: var(--seashell);
+                            background-color: var(--primary);
+                            color: var(--text);
                             cursor: pointer;
                         }
                     }

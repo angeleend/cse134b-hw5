@@ -91,8 +91,8 @@ button {
 }
 
 #mode-toggle {
-        display: none;
-    }
+    display: none;
+}
 
 header {
     display: flex;
@@ -382,7 +382,7 @@ picture {
                 font-size: 1.2rem;
                 margin-bottom: 0.5rem;
                 font-family: var(--font-heading);
-                color: var(--primary)
+                color: var(--primary);
             }
 
             & input, textarea {
@@ -393,7 +393,7 @@ picture {
                 font-size: 1.1rem;
                 background-color: transparent; 
                 color: var(--primary);
-                width: 100%
+                width: 100%;
             }
 
             & textarea {
