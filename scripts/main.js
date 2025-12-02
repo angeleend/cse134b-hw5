@@ -14,7 +14,7 @@ class ProjectCard extends HTMLElement {
         this.innerHTML = '';
         this.innerHTML += `
             <div class="project-card">
-                <h2>${title}</h2>
+                <h3>${title}</h3>
                 <picture>
                     <source srcset="${image}" alt="${title} screenshot">
                     <img src="${image}" alt="${title} screenshot">
