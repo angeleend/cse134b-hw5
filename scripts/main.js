@@ -37,6 +37,46 @@ class ProjectCard extends HTMLElement {
 console.log('Custom elements defined: ProjectCard');
 customElements.define('project-card', ProjectCard);
 
+//JSON LOADING
+const remoteBtn = document.getElementById('remote-btn');
+if (remoteBtn) {
+    remoteBtn.addEventListener('click', loadRemoteJSON);
+}
+
+async function loadRemoteJSON() {
+    const url = ('https://my-json-server.typicode.com/angeleend/cse134b-hw5/projects')
+    const projectsGrid = document.getElementById('projects-grid');
+
+    projectsGrid.innerHTML = '';
+    
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const projectsData = await response.json();
+        console.log('Fetched remote JSON data:', projectsData);
+
+        projectsData.forEach(project => {
+            const card = document.createElement('project-card');
+
+            card.setAttribute('title', project.title);
+            card.setAttribute('image', project.image);
+            card.setAttribute('desc', project.desc);
+            card.setAttribute('url', project.url);
+            card.setAttribute('published', project.published);
+
+            const listItem = document.createElement('li');
+            listItem.appendChild(card);
+
+            projectsGrid.appendChild(listItem);
+        });
+
+    } catch (error) {
+        console.error('Error fetching JSON data:', error);
+    }
+}
 
 // THEME TOGGLE
 let dialog = document.getElementById('mode-dialog');

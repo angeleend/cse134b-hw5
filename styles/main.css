@@ -244,7 +244,7 @@ picture {
     margin-top: 1rem;
 }
 
-.projects-grid {
+#projects-grid {
     display: grid;
     align-items: center;
     justify-content: center;
@@ -258,9 +258,8 @@ picture {
     & li {
         margin: 0;
         padding: 0;
-    }
 
-    & .project-card {
+         & .project-card {
         & h3 {
             margin-bottom: 0.5rem;
         }
@@ -279,6 +278,7 @@ picture {
             text-decoration: none;
             color: var(--primary);
         }
+    }
     }
 }
 

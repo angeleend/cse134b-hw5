@@ -1,10 +1,10 @@
 {
     "projects": [
         {
-            "title": "Kiosk Website", 
-            "image": "images/kiosk.jpeg",
-            "desc": "Created a kiosk website for a local coffee shop that displays their menu and location information.",
-            "url": "https://alexisvvega.github.io/Team10/",
+            "title": "Buzzfeed-Esque Website",
+            "image": "images/buzzfeed.jpeg",
+            "desc": "Created a Super Mario themed Buzzfeed-esque website with mini games for users to play with!",
+            "url": "https://alexisvvega.github.io/Team11/",
             "published": "VIEW PROJECT"
         }, 
         {
