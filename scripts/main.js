@@ -1,3 +1,43 @@
+// PROJECT-CARD CUSTOM ELEMENT
+class ProjectCard extends HTMLElement {
+    constructor() {
+        super();
+    }
+
+    connectedCallback() {
+        const title = this.getAttribute('title');
+        const image = this.getAttribute('image');
+        const desc = this.getAttribute('desc');
+        const url = this.getAttribute('url');
+        const published = this.getAttribute('published');
+
+        this.innerHTML = '';
+        this.innerHTML += `
+            <div class="project-card">
+                <h2>${title}</h2>
+                <picture>
+                    <source srcset="${image}" alt="${title} screenshot">
+                    <img src="${image}" alt="${title} screenshot">
+                </picture>
+                <p>${desc}</p>
+                <button>
+                    <a href="${url}" target="_blank" rel="noopener">${published}</a>
+                </button>
+            </div>
+        `;
+
+        this.querySelector('.project-card').addEventListener('click', () => this.bubbleUp()); 
+    }
+
+    bubbleUp() {
+        console.log('bubbles');
+    }
+}
+
+console.log('Custom elements defined: ProjectCard');
+customElements.define('project-card', ProjectCard);
+
+
 // THEME TOGGLE
 let dialog = document.getElementById('mode-dialog');
 let toggle = document.getElementById('mode-toggle');
