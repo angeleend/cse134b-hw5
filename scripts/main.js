@@ -20,9 +20,7 @@ class ProjectCard extends HTMLElement {
                     <img src="${image}" alt="${title} screenshot">
                 </picture>
                 <p>${desc}</p>
-                <button>
-                    <a href="${url}" target="_blank" rel="noopener">${published}</a>
-                </button>
+                <a href="${url}" target="_blank" rel="noopener">${published}</a>
             </div>
         `;
 
@@ -38,14 +36,83 @@ console.log('Custom elements defined: ProjectCard');
 customElements.define('project-card', ProjectCard);
 
 //JSON LOADING
-const remoteBtn = document.getElementById('remote-btn');
-if (remoteBtn) {
-    remoteBtn.addEventListener('click', loadRemoteJSON);
+document.addEventListener('DOMContentLoaded', () => {
+    checkLocalStorage();
+    const localBtn = document.getElementById('local-btn');
+    if (localBtn) {
+        localBtn.addEventListener('click', loadLocal);
+    }
+
+    const remoteBtn = document.getElementById('remote-btn');
+    if (remoteBtn) {
+        remoteBtn.addEventListener('click', loadRemote);
+    }
+});
+const projectsGrid = document.getElementById('projects-grid');
+const STORED_DATA = 'localProjects';
+
+const projectsArray = {
+    "projects": [
+        {
+            "title": "Buzzfeed-Esque Website",
+            "image": "images/buzzfeed.jpeg",
+            "desc": "Created a Super Mario themed Buzzfeed-esque website with mini games for users to play with!",
+            "url": "https://alexisvvega.github.io/Team11/",
+            "published": "VIEW PROJECT"
+        }, 
+        {
+            "title": "Restaurant Inventory App",
+            "image": "images/inventory-app.png",
+            "desc": "Designed a restaurant inventory app according to the client's needs in order to streamline stock management.",
+            "url": "https://www.figma.com/design/6u79RDZZ91HpRfZrB9mDjr/Inventory-App?t=P1vIidXYgWqmguIo-1",
+            "published": "VIEW PROJECT"
+        },
+        {
+            "title": "Marathon Pace Tracker",
+            "image": "images/pace.png",
+            "desc": "Designed a motivational marathon pace tracker for runners to ensure they meet their personal goals.",
+            "url": "#",
+            "published": "COMING SOON!"
+        }
+    ]
+};
+
+const projectsJSON = JSON.stringify(projectsArray);
+
+async function checkLocalStorage() {
+    if (localStorage.getItem(STORED_DATA) == null) {
+    localStorage.setItem(STORED_DATA, projectsJSON);
+    console.log('Local JSON data stored.');
 }
 
-async function loadRemoteJSON() {
+}
+async function loadLocal() {
+    projectsGrid.innerHTML = '';
+    const loadData = localStorage.getItem(STORED_DATA);
+
+    if (loadData) {
+        const dataParsed = JSON.parse(loadData);
+        const projectsData = dataParsed.projects;
+
+        projectsData.forEach(project => {
+            const card = document.createElement('project-card');
+
+            card.setAttribute('title', project.title);
+            card.setAttribute('image', project.image);
+            card.setAttribute('desc', project.desc);
+            card.setAttribute('url', project.url);
+            card.setAttribute('published', project.published);
+
+            const listItem = document.createElement('li');
+            listItem.appendChild(card);
+
+            projectsGrid.appendChild(listItem);
+        });
+    }
+}
+
+async function loadRemote() {
     const url = ('https://my-json-server.typicode.com/angeleend/cse134b-hw5/projects')
-    const projectsGrid = document.getElementById('projects-grid');
 
     projectsGrid.innerHTML = '';
     
