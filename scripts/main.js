@@ -9,7 +9,7 @@ class ProjectCard extends HTMLElement {
         const image = this.getAttribute('image');
         const desc = this.getAttribute('desc');
         const url = this.getAttribute('url');
-        const published = this.getAttribute('published');
+        const view = this.getAttribute('view');
 
         this.innerHTML = '';
         this.innerHTML += `
@@ -20,7 +20,7 @@ class ProjectCard extends HTMLElement {
                     <img src="${image}" alt="${title} screenshot">
                 </picture>
                 <p>${desc}</p>
-                <a href="${url}" target="_blank" rel="noopener">${published}</a>
+                <a href="${url}" target="_blank" rel="noopener">${view}</a>
             </div>
         `;
 
@@ -58,21 +58,21 @@ const projectsArray = {
             "image": "images/buzzfeed.jpeg",
             "desc": "Created a Super Mario themed Buzzfeed-esque website with mini games for users to play with!",
             "url": "https://alexisvvega.github.io/Team11/",
-            "published": "VIEW PROJECT"
+            "view": "VIEW PROJECT"
         }, 
         {
             "title": "Restaurant Inventory App",
             "image": "images/inventory-app.png",
             "desc": "Designed a restaurant inventory app according to the client's needs in order to streamline stock management.",
             "url": "https://www.figma.com/design/6u79RDZZ91HpRfZrB9mDjr/Inventory-App?t=P1vIidXYgWqmguIo-1",
-            "published": "VIEW PROJECT"
+            "view": "VIEW PROJECT"
         },
         {
             "title": "Marathon Pace Tracker",
             "image": "images/pace.png",
             "desc": "Designed a motivational marathon pace tracker for runners to ensure they meet their personal goals.",
             "url": "#",
-            "published": "COMING SOON!"
+            "view": "COMING SOON!"
         }
     ]
 };
@@ -101,7 +101,7 @@ async function loadLocal() {
             card.setAttribute('image', project.image);
             card.setAttribute('desc', project.desc);
             card.setAttribute('url', project.url);
-            card.setAttribute('published', project.published);
+            card.setAttribute('view', project.view);
 
             const listItem = document.createElement('li');
             listItem.appendChild(card);
@@ -132,7 +132,7 @@ async function loadRemote() {
             card.setAttribute('image', project.image);
             card.setAttribute('desc', project.desc);
             card.setAttribute('url', project.url);
-            card.setAttribute('published', project.published);
+            card.setAttribute('view', project.view);
 
             const listItem = document.createElement('li');
             listItem.appendChild(card);

@@ -1,0 +1,55 @@
+<!-- Create another page that allows you to perform the remaining CRUD actions 
+ (mainly create [POST], update [POST or PUT], and delete [DELETE]) on any data in 
+ either the localStorage or cloud-based version through a form (displaying the 
+ <project-card> elements in part 2 can count as the "Read" portion of CRUD and 
+ does not have to be on a separate page). For simplicity, you do not have to 
+ worry about making the localStorage and cloud data consistent with each other. 
+ Changes should take effect upon the next load of your <project-cards> 
+ (via "load local" or "load remote" whichever is applicable) -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Project Card CRUD Actions</title>
+    <link rel="stylesheet" href="styles/main.css">
+    
+    <body>
+        <h1>Remaining CRUD Actions</h1>
+        <form id="crud-form" action="/submit-form.php" method="POST">
+            <fieldset>
+                <legend>CRUD Actions</legend>
+                <div>
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+
+                <div>
+                    <label for="image">Image URL:</label>
+                    <input type="url" id="image" name="image" required>
+                </div>
+
+                <div>
+                    <label for="description">Description:</label>
+                    <textarea id="description" name="description" rows="4" required></textarea>
+                </div>
+
+                <div>
+                    <label for="url">URL:</label>
+                    <input type="url" id="url" name="url" required>
+                </div>
+
+                <div>
+                    <label for="ready">Is this project ready to be public release?</label>
+                    <select id="ready" name="ready" required>
+                        <option value="yes">VIEW PROJECT</option>
+                        <option value="no">COMING SOON!</option>
+                    </select>
+            </fieldset>
+            <button id="send-message" type="submit">Send Message</button>
+        </form>
+    </body>
+    
+    <script></script>
+</html>
