@@ -28,22 +28,23 @@
 
                 <div>
                     <label for="image">Image URL:</label>
-                    <input type="url" id="image" name="image" required>
+                    <input type="url" id="image" name="image">
                 </div>
 
                 <div>
                     <label for="description">Description:</label>
-                    <textarea id="description" name="description" rows="4" required></textarea>
+                    <textarea id="description" name="description" rows="4" ></textarea>
                 </div>
 
                 <div>
                     <label for="url">Project Link:</label>
-                    <input type="url" id="url" name="url" required>
+                    <input type="url" id="url" name="url">
                 </div>
 
                 <div>
                     <label for="ready">Is this project ready to be public release?</label>
-                    <input type="text" id="ready" name="ready" required>
+                    <input type="text" id="ready" name="ready">
+                </div>
             </fieldset>
             <button id="create" type="button">Create Project</button>
             <button id="update" type="button">Update Project</button>
@@ -52,14 +53,34 @@
     </body>
     
     <script>
-        const crudForm = document.getElementById('crud-form');
         const STORED_DATA = 'localProjects';
+        const crudForm = document.getElementById('crud-form');
+        const createBtn = document.getElementById('create');
+        const updateBtn = document.getElementById('update');
+        const deleteBtn = document.getElementById('delete');
 
         crudForm.addEventListener('submit', function(event) {
             event.preventDefault();    
         });
 
-        document.getElementById('create').addEventListener('click', function() {
+        function getProjectsData() {
+            const storedString = localStorage.getItem(STORED_DATA);
+            return storedString ? JSON.parse(storedString).projects : [];
+        }
+
+        function saveProjectsData(projectsArray) {
+            const dataObject = { projects: projectsArray };
+            localStorage.setItem(STORED_DATA, JSON.stringify(dataObject));
+        }
+
+        createBtn.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            if (!crudForm.title.value || !crudForm.image.value || !crudForm.description.value || !crudForm.url.value || !crudForm.ready.value) {
+                alert("Please fill out ALL fields to create a new project.");
+                return; 
+            }
+
             const newProject = {
                 title: document.getElementById('title').value,
                 image: document.getElementById('image').value,
@@ -68,11 +89,34 @@
                 view: document.getElementById('ready').value
             };
 
-            let projects = JSON.parse(localStorage.getItem(STORED_DATA)) || [];
+            let projects = getProjectsData();
             projects.push(newProject);
-            localStorage.setItem(STORED_DATA, JSON.stringify(projects));
+            saveProjectsData(projects);
             alert('Project created successfully!');
-            // crudForm.reset();
+            crudForm.reset();
+        });
+
+        updateBtn.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            const title = document.getElementById('title').value;
+            let projects = getProjectsData();
+            const projectIndex = projects.findIndex(proj => proj.title === title);
+
+            if (projectIndex !== -1) {
+                const currentProject = projects[projectIndex];
+
+                currentProject.image = document.getElementById('image').value || currentProject.image;
+                currentProject.desc = document.getElementById('description').value || currentProject.desc;
+                currentProject.url = document.getElementById('url').value || currentProject.url;
+                currentProject.view = document.getElementById('ready').value || currentProject.view;
+
+                saveProjectsData(projects);
+                alert('Project updated successfully!');
+            } else {
+                alert('Project not found!');
+            }
+            crudForm.reset();
         });
     </script>
 </html>

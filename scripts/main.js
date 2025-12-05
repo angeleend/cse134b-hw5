@@ -48,9 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
         remoteBtn.addEventListener('click', loadRemote);
     }
 });
+
 const projectsGrid = document.getElementById('projects-grid');
 const STORED_DATA = 'localProjects';
-
 const projectsArray = {
     "projects": [
         {
@@ -81,11 +81,11 @@ const projectsJSON = JSON.stringify(projectsArray);
 
 async function checkLocalStorage() {
     if (localStorage.getItem(STORED_DATA) == null) {
-    localStorage.setItem(STORED_DATA, projectsJSON);
-    console.log('Local JSON data stored.');
+        localStorage.setItem(STORED_DATA, projectsJSON);
+        console.log('Local JSON data stored.');
+    }
 }
 
-}
 async function loadLocal() {
     projectsGrid.innerHTML = '';
     const loadData = localStorage.getItem(STORED_DATA);
