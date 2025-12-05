@@ -14,6 +14,74 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Project Card CRUD Actions</title>
         <link rel="stylesheet" href="styles/main.css">
+        <link rel="stylesheet" href="fonts/archivo-narrow/an.css">
+        <link rel="stylesheet" href="fonts/general-sans/gs.css">
+        <style>
+            body {
+                padding: 3rem;
+            }
+            form {
+                border: 1px solid var(--text-alt);
+                background-color: var(--accent);
+                padding: 2.5rem;
+
+                & fieldset {
+                    border: none;
+                    padding: 0;
+                    margin: 0;
+
+                    & legend {
+                        color: var(--primary);
+                        font-size: 1.5rem;
+                        font-weight: 700;
+                        margin-bottom: 1rem;
+                        padding: 0;
+                    }
+
+                    & div {
+                        width: 100%;
+                        margin-bottom: 1.5rem;
+                        display: flex;
+                        flex-direction: column;
+                    }
+
+                    & label {
+                        font-size: 1.2rem;
+                        margin-bottom: 0.5rem;
+                        font-family: var(--font-heading);
+                        color: var(--primary);
+                    }
+
+                    & input, textarea, select {
+                        border: 1px solid var(--primary);
+                        border-bottom: 1px solid var(--primary);
+                        padding: 0.75rem 0.5rem;
+                        font-family: var(--font-body);
+                        font-size: 1.1rem;
+                        background-color: var(--accent); 
+                        color: var(--primary);
+                        width: 100%;
+                    }
+
+                    & textarea {
+                        resize: vertical;
+                    }
+                }
+                
+                & #create, #update, #delete {
+                    background-color: var(--text);
+                    color: var(--primary);
+                    border: 1px solid var(--text);
+                    transition: transform 0.2s ease-out;
+
+                    &:hover {
+                        background-color: var(--primary);
+                        color: var(--text);
+                        cursor: pointer;
+                    }
+                }
+            }
+        </style>
     </head>
 
     <body>
@@ -42,8 +110,12 @@
                 </div>
 
                 <div>
-                    <label for="ready">Is this project ready to be public release?</label>
-                    <input type="text" id="ready" name="ready">
+                    <label for="ready">Ready to be released?</label>
+                        <select id="ready" name="ready">
+                            <option value="" disabled selected>Select Status</option> 
+                            <option value="VIEW PROJECT">VIEW PROJECT</option>
+                            <option value="COMING SOON!">COMING SOON!</option>
+                        </select>
                 </div>
             </fieldset>
             <button id="create" type="button">Create Project</button>
