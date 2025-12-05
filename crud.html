@@ -9,17 +9,18 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Project Card CRUD Actions</title>
-    <link rel="stylesheet" href="styles/main.css">
-    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Project Card CRUD Actions</title>
+        <link rel="stylesheet" href="styles/main.css">
+    </head>
+
     <body>
-        <h1>Remaining CRUD Actions</h1>
-        <form id="crud-form" action="/submit-form.php" method="POST">
+        <h1>CRUD on Project Cards</h1>
+        <form id="crud-form">
             <fieldset>
-                <legend>CRUD Actions</legend>
+                <legend>Project Details</legend>
                 <div>
                     <label for="title">Title:</label>
                     <input type="text" id="title" name="title" required>
@@ -36,20 +37,42 @@
                 </div>
 
                 <div>
-                    <label for="url">URL:</label>
+                    <label for="url">Project Link:</label>
                     <input type="url" id="url" name="url" required>
                 </div>
 
                 <div>
                     <label for="ready">Is this project ready to be public release?</label>
-                    <select id="ready" name="ready" required>
-                        <option value="yes">VIEW PROJECT</option>
-                        <option value="no">COMING SOON!</option>
-                    </select>
+                    <input type="text" id="ready" name="ready" required>
             </fieldset>
-            <button id="send-message" type="submit">Send Message</button>
+            <button id="create" type="button">Create Project</button>
+            <button id="update" type="button">Update Project</button>
+            <button id="delete" type="button">Delete Project</button>
         </form>
     </body>
     
-    <script></script>
+    <script>
+        const crudForm = document.getElementById('crud-form');
+        const STORED_DATA = 'localProjects';
+
+        crudForm.addEventListener('submit', function(event) {
+            event.preventDefault();    
+        });
+
+        document.getElementById('create').addEventListener('click', function() {
+            const newProject = {
+                title: document.getElementById('title').value,
+                image: document.getElementById('image').value,
+                desc: document.getElementById('description').value,
+                url: document.getElementById('url').value,
+                view: document.getElementById('ready').value
+            };
+
+            let projects = JSON.parse(localStorage.getItem(STORED_DATA)) || [];
+            projects.push(newProject);
+            localStorage.setItem(STORED_DATA, JSON.stringify(projects));
+            alert('Project created successfully!');
+            // crudForm.reset();
+        });
+    </script>
 </html>
