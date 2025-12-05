@@ -43,7 +43,7 @@ h1 {
 
 h2 {
     font-size: 3rem;
-    margin: 0.75rem 0;
+    margin: 1.5rem 0;
     color: var(--accent);
 }
 
@@ -72,8 +72,9 @@ ul {
 }
 
 button {
-    width: 100%;
-    margin: 1rem 0;
+    display: block;
+    width: 22vw;
+    margin: 3rem auto;
     padding: 1rem;
     background-color: var(--text);
     color: var(--primary);
@@ -148,6 +149,7 @@ header {
             font-weight: 700;
             font-size: 2rem; 
             line-height: 0;
+            letter-spacing: 0.1rem;
 
             &:visited {
                 color: var(--text);
@@ -226,12 +228,20 @@ section {
 }
 
 /* --- PROJECTS SECTION --- */
+
 picture {
     transition: transform 0.2s ease-out;
 
     &:hover {
         transform: translateY(-0.5rem);
         cursor: pointer;
+    }
+}
+
+.gallery-view {
+    & img {
+        display: block;
+        margin: auto;
     }
 }
 
@@ -300,6 +310,17 @@ picture {
     }
 }
 
+#load-container {
+    /* background-color: var(--text); */
+    gap: 1rem;
+
+    & #local-btn, & #remote-btn {
+        width: 100%;
+        font-size: 1rem;
+        padding: 0.5rem;
+        border: 1px solid var(--text);
+    }
+}
 
 /* --- EXPERIENCE SECTION --- */
 #experience {
@@ -394,6 +415,7 @@ picture {
         grid-template-columns: 1fr 1fr 1fr;
         grid-auto-rows: minmax(min-content, max-content);
         gap: 1.5rem;
+        padding: 0;
 
         & .contact-item {
             display: flex;
@@ -459,6 +481,7 @@ picture {
         }
         
         & #send-message {
+            width: 100%;
             background-color: var(--text);
             color: var(--primary);
             border: 1px solid var(--text);
