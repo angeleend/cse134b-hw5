@@ -93,6 +93,7 @@
             projects.push(newProject);
             saveProjectsData(projects);
             alert('Project created successfully!');
+            
             crudForm.reset();
         });
 
@@ -113,6 +114,23 @@
 
                 saveProjectsData(projects);
                 alert('Project updated successfully!');
+            } else {
+                alert('Project not found!');
+            }
+            crudForm.reset();
+        });
+
+        deleteBtn.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            const title = document.getElementById('title').value;
+            let projects = getProjectsData();
+            const projectIndex = projects.findIndex(proj => proj.title === title);
+
+            if (projectIndex !== -1) {
+                projects.splice(projectIndex, 1);
+                saveProjectsData(projects);
+                alert('Project deleted successfully!');
             } else {
                 alert('Project not found!');
             }
