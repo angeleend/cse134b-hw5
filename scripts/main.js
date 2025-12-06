@@ -1,3 +1,41 @@
+// GALLERY VIEW ARROWS
+const kioskImgs = document.getElementById('kiosk-images');
+const galleryView = document.querySelector('.gallery-view');
+const projectImg = galleryView.querySelector('img');
+const sources = galleryView.querySelectorAll(' source');
+const leftArrow = document.getElementById('nav-left');
+const rightArrow = document.getElementById('nav-right');
+const getThumbnails = kioskImgs ? Array.from(kioskImgs.querySelectorAll('a')) : [];
+const fullGallery = [];
+
+getThumbnails.forEach((link, index) => {
+    const img = link.querySelector('img');
+    fullGallery.push({
+        src: img.src,
+        alt: img.alt,
+        index: index
+    });
+});
+
+let curr = 0;
+
+function navigate(arrowDirection) {
+    if (arrowDirection === 'left') {
+        curr = (curr - 1 + fullGallery.length) % fullGallery.length;
+    } else if (arrowDirection === 'right') {
+        curr = (curr + 1) % fullGallery.length;
+    }
+
+    const newImg = fullGallery[curr];
+
+    sources.forEach(source => {
+        source.srcset = newImg.src;
+    });
+}
+
+leftArrow.addEventListener('click', () => navigate('left'));
+rightArrow.addEventListener('click', () => navigate('right'));
+
 // PROJECT-CARD CUSTOM ELEMENT
 class ProjectCard extends HTMLElement {
     constructor() {
@@ -186,11 +224,6 @@ dark.addEventListener('click', () => {
 cancel.addEventListener('click', () => dialog.close());
 
 // VIEW TRANSITION API
-const kioskImgs = document.getElementById('kiosk-images');
-const galleryView = document.querySelector('.gallery-view');
-const projectImg = galleryView.querySelector('img');
-const sources = galleryView.querySelectorAll(' source');
-
 kioskImgs.addEventListener('click', updateView);
 
 function updateView(event) {

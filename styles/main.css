@@ -238,6 +238,16 @@ picture {
     }
 }
 
+.nav-arrow, .nav-arrow:hover {
+    padding: 0;
+    background-color: transparent;
+    color: var(--text);
+    border: none;
+    width: auto;
+    font-weight: 600;
+    font-size: 3rem;
+}
+
 .gallery-view {
     & img {
         display: block;
