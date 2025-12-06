@@ -28,6 +28,9 @@ function navigate(arrowDirection) {
 
     const newImg = fullGallery[curr];
 
+    projectImg.src = newImg.src;
+    projectImg.alt = newImg.alt;
+
     sources.forEach(source => {
         source.srcset = newImg.src;
     });
@@ -96,14 +99,14 @@ const projectsArray = {
             "image": "images/buzzfeed.jpeg",
             "desc": "Created a Super Mario themed Buzzfeed-esque website with mini games for users to play with!",
             "url": "https://alexisvvega.github.io/Team11/",
-            "view": "VIEW PROJECT"
+            "view": "VIEW CASE STUDY"
         }, 
         {
             "title": "Restaurant Inventory App",
             "image": "images/inventory-app.png",
             "desc": "Designed a restaurant inventory app according to the client's needs in order to streamline stock management.",
             "url": "https://www.figma.com/design/6u79RDZZ91HpRfZrB9mDjr/Inventory-App?t=P1vIidXYgWqmguIo-1",
-            "view": "VIEW PROJECT"
+            "view": "VIEW CASE STUDY"
         },
         {
             "title": "Marathon Pace Tracker",
