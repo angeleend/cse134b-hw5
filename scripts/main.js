@@ -275,7 +275,7 @@ function charsLeft() {
     let charsRemaining = message.maxLength - message.value.length;
 
     if (charsRemaining == 0)  {
-        message.style.backgroundColor = '#9F89D2';
+        message.style.backgroundColor = 'var(--error-message)';
         message.style.color = 'var(--primary)';
         message.style.fontWeight = '500';
         addError('message', 'lengthError');
@@ -289,7 +289,7 @@ function charsLeft() {
         }, 4000);
 
     } else if (charsRemaining < 10) {
-        message.style.backgroundColor = '#9F89D2';
+        message.style.backgroundColor = 'var(--error-message)';
         message.style.color = 'var(--primary)';
         message.style.fontWeight = '500';
 

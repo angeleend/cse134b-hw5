@@ -7,10 +7,12 @@
     --wisteria: #C2B3E3;
     --dusk: #445271;
 
+
     --primary: var(--porcelain);
     --accent: var(--dusk);
     --text: var(--brown);
     --text-alt: var(--black);
+    --error-message: #2F384C;
 
     --shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
 }
@@ -26,6 +28,7 @@ html.dark-mode {
     --accent: var(--wisteria);
     --text: var(--porcelain);
     --text-alt: var(--porcelain);
+    --error-message: #9F89D2;
 
     --shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
 
