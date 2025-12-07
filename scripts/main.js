@@ -186,45 +186,150 @@ async function loadRemote() {
     }
 }
 
-// THEME TOGGLE
-let dialog = document.getElementById('mode-dialog');
-let toggle = document.getElementById('mode-toggle');
-let light = document.getElementById('light-mode');
-let dark = document.getElementById('dark-mode');
-let cancel = document.getElementById('cancel-dialog');
-let body = document.body;
+let name = document.getElementById('name');
+let email = document.getElementById('email');
+let message = document.getElementById('message');
+let form = document.getElementById('contact-form');
+let error = document.getElementById('error');
+let info = document.getElementById('info');
+let formErrorsInput = document.getElementById('form-errors');
 
-toggle.style.display = 'block';
-document.addEventListener('DOMContentLoaded', defaultMode);
+let form_errors = [];
+let validTimeout;
 
-function applyMode(mode) {
-    if (mode == 'dark')  {
-        body.classList.add('dark-mode');
-        localStorage.setItem('theme', 'dark');
+// NAME VALIDATION
+name.addEventListener('input', function() {
+    clearTimeout(validTimeout);
+    error.textContent = '';
+    info.textContent = '';
+
+    if (name.validity.patternMismatch) {
+        addError('name', 'patternMismatch');
+
+        let errorMessage = 'No special characters please! Only enter letters, spaces, periods, apostrophes, and hyphens for your name.';
+        name.setCustomValidity(errorMessage);
+        error.textContent = name.validationMessage;
+
+        validTimeout = setTimeout(() => {
+            error.textContent = '';
+        }, 4000);
+
+    } else if (name.checkValidity() == false) {
+        addError('name', 'lengthError');
+
+        let errorMessage = 'Your name must be between 3 and 100 characters long.';
+        name.setCustomValidity(errorMessage);
+        error.textContent = name.validationMessage;
+
+        validTimeout = setTimeout(() => {
+            error.textContent = '';
+        }, 4000);
+
     } else {
-        body.classList.remove('dark-mode');
-        localStorage.setItem('theme', 'light');
+        info.textContent = 'Your name looks great!';
+
+        validTimeout = setTimeout(() => {
+            info.textContent = '';
+        }, 4000);
     }
-}
 
-function defaultMode() {
-    let localMode = localStorage.getItem('theme');
-    applyMode(localMode);
-}
-
-toggle.addEventListener('click', () => dialog.showModal());
-
-light.addEventListener('click', () => {
-    applyMode('light');
-    dialog.close();
+    name.setCustomValidity('');
 });
 
-dark.addEventListener('click', () => {
-    applyMode('dark');
-    dialog.close();
-});  
+// EMAIL VALIDATION
+email.addEventListener('input', function() {
+    clearTimeout(validTimeout);
+    error.textContent = '';
+    info.textContent = '';
 
-cancel.addEventListener('click', () => dialog.close());
+    if (email.checkValidity() == false) {
+        addError('email', 'lengthError');
+
+        let errorMessage = 'Your email address seems to be too short to be a valid email, please ensure it is correct.';
+        email.setCustomValidity(errorMessage);
+        error.textContent = email.validationMessage;
+
+        validTimeout = setTimeout(() => {
+            error.textContent = '';
+        }, 4000);
+
+    } else {
+        info.textContent = 'Your email looks great!';
+
+        validTimeout = setTimeout(() => {
+            info.textContent = '';
+        }, 4000);
+    }
+
+    email.setCustomValidity('');
+});
+
+// MESSAGE VALIDATION
+message.addEventListener('input', charsLeft);
+
+function charsLeft() {
+    clearTimeout(validTimeout);
+    error.textContent = '';
+    info.textContent = '';
+
+    let charsRemaining = message.maxLength - message.value.length;
+
+    if (charsRemaining == 0)  {
+        message.style.backgroundColor = '#9F89D2';
+        message.style.color = 'var(--primary)';
+        message.style.fontWeight = '500';
+        addError('message', 'lengthError');
+
+        let errorMessage = 'You have reached the maximum character limit for the message field.';
+        message.setCustomValidity(errorMessage);
+        error.textContent = message.validationMessage;
+        
+        validTimeout = setTimeout(() => {
+            error.textContent = '';
+        }, 4000);
+
+    } else if (charsRemaining < 10) {
+        message.style.backgroundColor = '#9F89D2';
+        message.style.color = 'var(--primary)';
+        message.style.fontWeight = '500';
+
+        addError('message', 'lengthError');
+
+        let errorMessage = `Your message is getting close to the maximum character limit. You have ${charsRemaining} characters remaining.`;
+        message.setCustomValidity(errorMessage);
+        error.textContent = message.validationMessage;
+
+        validTimeout = setTimeout(() => {
+            error.textContent = '';
+        }, 4000);
+
+    } else {
+        message.style.fontWeight = '400';
+        info.textContent = `${charsRemaining} characters remaining`;
+
+        validTimeout = setTimeout(() => {
+            info.textContent = '';
+        }, 4000);
+    }
+
+    message.setCustomValidity('');
+}
+
+// USER ERRORS
+form.addEventListener('submit', function(event) {
+    if (form_errors.length > 0) {
+        formErrorsInput.value = JSON.stringify(form_errors);
+    }
+});
+
+function addError(fieldName, errorType) {
+    const fieldError = {
+        field: fieldName,
+        error: errorType
+    };
+
+    form_errors.push(fieldError);
+}
 
 // VIEW TRANSITION API
 kioskImgs.addEventListener('click', updateView);

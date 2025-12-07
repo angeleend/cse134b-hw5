@@ -24,6 +24,12 @@
                     padding: 2rem;
                 }
 
+                #projects {
+                    & .nav-arrow {
+                        font-size: 1.25rem;
+                    }
+                }
+
                 #skills {
                     & #skills-list {
                         grid-template-columns: 1fr 1fr;
@@ -33,23 +39,34 @@
                         width: 100%;
 
                         & .skill-item .skill-logo {
-                            width: 3rem;
-                            height: 3rem;
+                            width: 2.5rem;
+                            height: 2.5rem;
                         }
                     }
                 }
 
-                #contact {
-                    & #contact-list {
-                        grid-template-columns: 1fr 1fr;
-                        gap: 1rem;
-                        padding: 0;
-                        margin: 0;
-                        width: 100%;
+                footer {
+                    padding: 0 2rem;
+                    
+                    & .horizontal {
+                        & p {
+                            font-size: 1.25rem;
+                        }
 
-                        & ul li .contact-item .contact-logo {
-                            width: 3rem;
-                            height: 3rem;
+                        & #contact-list {
+                            & .contact-item {
+                                gap: 0.5rem;
+
+                                & .contact-logo {
+                                    width: 1.25rem;
+                                    height: 1.25rem;
+                                }
+
+                                & a {
+                                    font-size: 1.25rem;
+                                    margin-top: 0.5rem;
+                                }
+                            }
                         }
                     }
                 }
@@ -57,9 +74,11 @@
 
             @media (max-width: 768px) {
                 h1 { font-size: 1.5rem; }
-                h2 { font-size: 1.25rem; }
+                h2 { font-size: 1.25rem; margin: 0.5rem 0;}
                 h3 { font-size: 1rem; }
                 h4, nav a, a, p, time, label, li, button { font-size: 0.75rem; }
+
+                button { width: 40vw;}
 
                 header {
                     padding: 0.5rem;
@@ -119,11 +138,20 @@
                     padding: 1rem;
                 }
 
+                #projects > .horizontal > div > .horizontal {
+                    gap: 1rem;
+                    & .gallery-view {
+                        & img {
+                            margin: 0;
+                        }
+                    }
+                }
+                
                 #kiosk-images {
                     display: none;
                 }
 
-                #projects .horizontal, #experience .horizontal, #about .horizontal{
+                #projects > .horizontal, #experience .horizontal, #about .horizontal{
                     display: block; 
                     gap: 0rem;
                 }
@@ -137,23 +165,8 @@
                         width: 100%;
 
                         & .skill-item .skill-logo {
-                            width: 3rem;
-                            height: 3rem;
-                        }
-                    }
-                }
-
-                #contact {
-                    & #contact-list {
-                        grid-template-columns: 1fr 1fr;
-                        gap: 1rem;
-                        padding: 0;
-                        margin: 0;
-                        width: 100%;
-
-                        & ul li .contact-item .contact-logo {
-                            width: 3rem;
-                            height: 3rem;
+                            width: 2rem;
+                            height: 2rem;
                         }
                     }
                 }
@@ -168,15 +181,55 @@
                         }
                     }
                 }
+
+                footer {
+                    padding: 0 1rem;
+                    
+                    & .horizontal {
+                        & p {
+                            font-size: 0.75rem;
+                        }
+
+                        & #contact-list {
+                            & .contact-item {
+                                gap: 0.5rem;
+
+                                & .contact-logo {
+                                    width: 1.25rem;
+                                    height: 1.25rem;
+                                }
+
+                                & a {
+                                    font-size: 0.75rem;
+                                    margin-top: 0.5rem;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        </style>
+        <script>
+            function applyMode(mode) {
+                let root = document.documentElement;
+                if (mode == 'dark')  {
+                    root.classList.add('dark-mode');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    root.classList.remove('dark-mode');
+                    localStorage.setItem('theme', 'light');
+                }
             }
 
-        </style>
+            applyMode(localStorage.getItem('theme'));
+        </script>
     </head>
 
     <body>
         <noscript>
             <p>
-                Javascript is not required to see my portfolio, except for the "Hello World!" message!
+                Javascript is needed to see some features of this website, like the theme toggle and view API transitions. Please enable
+                Javascript in your browser settings.
             </p>
         </noscript>
 
@@ -221,7 +274,7 @@
                         <div class="horizontal">
                             <button id="nav-left"class="nav-arrow">&lt;</button>  
                             <picture class="gallery-view">
-                                <source srcset="images/kiosk-s.png" media="(max-width: 600px)" width="300" height="200">
+                                <source srcset="images/kiosk-s.png" media="(max-width: 600px)" width="280" height="180">
 
                                 <source srcset="images/kiosk-m.png" media="(max-width: 768px)" width="400" height="300">
 
@@ -231,24 +284,25 @@
                             </picture>
                             <button id="nav-right" class="nav-arrow">&gt;</button>
                         </div>
-                    <div id="kiosk-images">
-                        <a href="#">
-                            <img alt="Matcha Maiko Self-Kiosk start screen with an image of a Maiko Special Parfait." src="images/kiosk-m.png" width="150" height="100">
-                        </a>
+                        <div id="kiosk-images">
+                            <a href="#">
+                                <img alt="Matcha Maiko Self-Kiosk start screen with an image of a Maiko Special Parfait." src="images/kiosk-m.png" width="150" height="100">
+                            </a>
 
-                        <a href="#">
-                            <img alt="Matcha Maiko Self-Kiosk quiz screen that allows customers to answer a series of questions and receive a recommendation." src="images/kiosk-quiz.png" width="150" height="100">
-                        </a>
+                            <a href="#">
+                                <img alt="Matcha Maiko Self-Kiosk quiz screen that allows customers to answer a series of questions and receive a recommendation." src="images/kiosk-quiz.png" width="150" height="100">
+                            </a>
 
-                        <a href="#">
-                            <img alt="Matcha Maiko Self-Kiosk menu screen with an images of teas, like Hojicha Drink and Matcha Drink." src="images/kiosk-menu.png" width="150" height="100">
-                        </a>
+                            <a href="#">
+                                <img alt="Matcha Maiko Self-Kiosk menu screen with an images of teas, like Hojicha Drink and Matcha Drink." src="images/kiosk-menu.png" width="150" height="100">
+                            </a>
 
-                        <a href="#">
-                            <img alt="Matcha Maiko Self-Kiosk item customization screen with options for selecting temperature, sweetness levels, and toppings." src="images/kiosk-item.png" width="150" height="100">
-                        </a>
+                            <a href="#">
+                                <img alt="Matcha Maiko Self-Kiosk item customization screen with options for selecting temperature, sweetness levels, and toppings." src="images/kiosk-item.png" width="150" height="100">
+                            </a>
+                        </div>
                     </div>
-                    </div>
+
                     <div>
                         <p>
                             Redesigned a self-service kiosk interface for a Matcha Maiko to enhance user 
@@ -279,6 +333,16 @@
                             <li>Integrating the front-end interface directly with MongoDB's data streams for patient monitoring.</li>
                             <li>Developing and deploying UI for the <b>Tricorder</b>, one of the primary devices for Lifesaver using HTML, CSS, and JavaScript.</li>
                             <li>Engineering responsive user interfaces from high-fidelity Figma specifications.</li>
+                        </ul>
+
+                     <div class="horizontal">
+                        <h3><em>Instructional Assistant</em></h3>
+                        <time datetime="2025-01-01">January 2025 - March 2025</time>
+                    </div>    
+                    <h4>DSGN 1: Introduction to the Design of Everyday Things at UC San Diego</h4>
+                        <ul>
+                            <li>Mentored and provided design critiques to students during studio sessions and online.</li>
+                            <li>Evaluated and graded student assignments and exams to ensure good understanding of design concepts and processes.</li>
                         </ul>
                 </article>
             </section>
@@ -324,10 +388,11 @@
                 <div class="horizontal">
                     <img src="images/me.jpg" alt="Image of Angeleen wearing a black top with the night sky in the background.">
                     <div>
-                        <p>I am a 4th year at UC San Diego with a passion 
-                            for human-computer interaction and computer science. I'm 
-                            really passionate about designing <em>accessible</em> products for users,
-                            especially within the medical field. 
+                        <p>I'm currently a 4th year student at UC San Diego, bridging 
+                            the gap between human-centered design and computer science. I'm super
+                            passionate about designing <em>accessible</em> products for ALL users,
+                            whether that's through user research, prototyping, or front-end development.
+
                         </p> 
                         <p> If you'd like to chat, send 
                             me a message on my <a href="#contact">contact</a> page!
@@ -338,67 +403,107 @@
                 <article>
                     <h3>Education</h3>
                     <h4>University of California, San Diego</h4>
-                    <p>B.S. in Cognitive Science Specialization in <i>Design and Interaction.</i><br>Minor in Computer Science.</p>
+                    <p>B.S. in Cognitive Science Specialization in <i>Design and Interaction.</i> Minor in Computer Science.</p>
                 </article>
 
                 <h3>Organizations</h3> 
-                    <div class="horizontal">
-                        <h4>Women In Computing</h4>
-                        <time datetime="2023-09">2023-Present</time>
+                    <div class="horizontal" style="border: none; box-shadow: none; padding: 0;">
+                            <h4>Test Developer, Triton Software Engineering</h4>
+                            <time datetime="2025-11">2025 - Present</time>
+                        </div>
+                        <p>Building foundational skills in software engineering 
+                            and utilizing various development tools, like Git, 
+                            MongoDB, React, etc. Applying these skills in a 
+                            personal project to soon be released.</p>
+                
+                    <div class="horizontal" style="border: none; box-shadow: none; padding: 0;">
+                        <h4>General Member, Women In Computing</h4>
+                        <time datetime="2023-09">2023 - Present</time>
                     </div>
-                    <p>Attended workshops and events focused on building technical skills and community.</p>
+                    <p>1st Place WIC Project Teams in Winter 2024 for our 
+                        Buzzfeed website. Attended workshops and built projects 
+                        to develop my technical skills and community involvement.</p>
             
                 <h3>Resume</h3>
                     <iframe src="resume.pdf" title="Angeleen Duong's Resume"></iframe>
             </section>
 
             <section id="contact">
-                <h2>CONTACT ME</h2>
-                <form id="contact-form" action="/submit-form.php" method="POST">
+                <h2>LET'S CHAT</h2>
+                <form id="contact-form" action="https://httpbin.org/post" method="POST">
+                    <input type="hidden" id="possible_bot" name="possible_bot" value="true">
+                    <input type="hidden" id="form-errors" name="form-errors" value="">
                     <fieldset>
                         <legend>Contact Info</legend>
                         <div>
                             <label for="name">Name:</label>
-                            <input type="text" id="name" name="name" required>
+                            <input type="text" id="name" name="name" pattern="^[A-Za-z\s.'\-]+$" minLength="3" maxLength="100" required>
                         </div>
 
                         <div>
                             <label for="email">Email:</label>
-                            <input type="email" id="email" name="email" required>
+                            <input type="email" id="email" name="email" minLength="3"required>
                         </div>
 
                         <div>
                         <label for="message">Message:</label>
-                        <textarea id="message" name="message" rows="6" required></textarea>
+                        <textarea id="message" name="message" minlength="1" maxlength="350" rows="6" required></textarea>
                         </div>
                     </fieldset>
                     <button id="send-message" type="submit">Send Message</button>
+                    <output id="error"></output>
+                    <output id="info"></output>
                 </form>
-
-                <ul id="contact-list">
-                    <li class="contact-item">
-                        <img src="images/gmail.svg" alt="Gmail logo" class="contact-logo">
-                        <a href="mailto:angeleenduong@gmail.com">angeleenduong@gmail.com</a>
-                    </li>
-
-                    <li class="contact-item">
-                        <img src="images/github.svg" alt="GitHub logo" class="contact-logo">
-                        <a href="https://github.com/angeleend">github.com/angeleend</a>
-                    </li>
-
-                    <li class="contact-item">
-                        <img src="images/linkedin.svg" alt="LinkedIn logo" class="contact-logo">
-                        <a href="https://linkedin.com/in/angeleen-duong">linkedin.com/in/angeleen-duong</a>
-                    </li>
-                </ul>
             </section>
         </main>
 
         <footer>
-            <p>&copy; Angeleen Duong</p>
+            <div class="horizontal">
+                <p>&copy; Angeleen Duong</p>
+                
+                <ul id="contact-list">
+                    <li class="contact-item">
+                        <img src="images/gmail.svg" alt="Email logo" class="contact-logo" loading="lazy">
+                        <a href="mailto:angeleenduong@gmail.com">angeleenduong@gmail.com</a>
+                    </li>
+
+                    <li class="contact-item">
+                        <img src="images/github.svg" alt="GitHub logo" class="contact-logo" loading="lazy">
+                        <a href="https://github.com/angeleend">github.com/angeleend</a>
+                    </li>
+
+                    <li class="contact-item">
+                        <img src="images/linkedin.svg" alt="LinkedIn logo" class="contact-logo" loading="lazy">
+                        <a href="https://linkedin.com/in/angeleen-duong">linkedin.com/in/angeleen-duong</a>
+                    </li>
+                </ul>
+            </div>
         </footer>
 
         <script src="scripts/main.js"></script>
+        <script>
+            // THEME TOGGLE
+            let dialog = document.getElementById('mode-dialog');
+            let toggle = document.getElementById('mode-toggle');
+            let light = document.getElementById('light-mode');
+            let dark = document.getElementById('dark-mode');
+            let cancel = document.getElementById('cancel-dialog');
 
+            toggle.style.display = 'block';
+
+            toggle.addEventListener('click', () => dialog.showModal());
+
+            light.addEventListener('click', () => {
+                applyMode('light');
+                dialog.close();
+            });
+
+            dark.addEventListener('click', () => {
+                applyMode('dark');
+                dialog.close();
+            });  
+
+            cancel.addEventListener('click', () => dialog.close());
+        </script>
     </body>
 </html>

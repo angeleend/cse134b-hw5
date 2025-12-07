@@ -11,6 +11,8 @@
     --accent: var(--dusk);
     --text: var(--brown);
     --text-alt: var(--black);
+
+    --shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
 }
 
 * {
@@ -19,11 +21,13 @@
     scroll-behavior: smooth;
 }
 
-body.dark-mode {
+html.dark-mode {
     --primary: var(--black);
     --accent: var(--wisteria);
     --text: var(--porcelain);
     --text-alt: var(--porcelain);
+
+    --shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
 
     & #landing {
         background-image: linear-gradient(
@@ -31,6 +35,28 @@ body.dark-mode {
         rgba(18, 17, 19, 0.6)
     ), 
     url(../images/IMG_6913.jpg);
+    }
+
+    & #skills {
+        background-image: linear-gradient(
+            rgba(18, 17, 19, 0.6), 
+            rgba(18, 17, 19, 0.6)
+        ), 
+        url(../images/IMG_6914.jpg);
+    
+        & #skills-list {
+            & .skill-item {
+                background-color: rgba(18, 17, 19, 0.6);
+            }
+        }
+    }
+
+    & footer {
+        background-image: linear-gradient(
+        rgba(18, 17, 19, 0.8), 
+        rgba(18, 17, 19, 0.8)
+    ),
+    url(../images/IMG_6986.jpg);
     }
 }
 
@@ -53,7 +79,7 @@ h1 {
 h2 {
     font-size: 3rem;
     margin: 1.5rem 0;
-    /* color: var(--accent); */
+    letter-spacing: 0.1rem;
 }
 
 h3 {
@@ -64,10 +90,12 @@ h3 {
 h4 {
     font-size: 2rem;
     margin: 0.25rem 0;
+    color: var(--accent);
 }
 
 p, a {
     font-size: 1.5rem;
+    font-weight: 500;
 }
 
 a { color: var(--text); }
@@ -87,10 +115,9 @@ button {
     padding: 1rem;
     background-color: var(--text);
     color: var(--primary);
-    border: none;
     font-size: 1.5rem;
     font-family: var(--font-body);
-    border: 1px solid var(--text);
+    border: 0.1rem solid var(--text);
     transition: transform 0.2s ease-out;
 
     &:hover {
@@ -98,10 +125,6 @@ button {
         color: var(--primary);
         cursor: pointer;
     }
-}
-
-#mode-toggle {
-    display: none;
 }
 
 header {
@@ -184,6 +207,7 @@ header {
             height: fit-content;
             width: fit-content;
             padding: 0.5rem 1rem;  
+            justify-items: center;
 
         & h1 {
             font-size: 2rem;
@@ -243,7 +267,7 @@ section {
     
     & #skip  { 
         background-color: var(--text-alt);
-        border: 1px solid var(--primary);
+        border: 0.1rem solid var(--primary);
         color: var(--primary);
         padding: 0.5rem;
         margin: 0;
@@ -335,7 +359,7 @@ picture {
                 color: var(--primary);
                 font-size: 1.5rem;
                 font-family: var(--font-body);
-                border: 1px solid var(--text);
+                border: 0.1rem solid var(--text);
                 transition: transform 0.2s ease-out;
 
                 &:hover {
@@ -356,7 +380,7 @@ picture {
         width: 100%;
         font-size: 1rem;
         padding: 0.5rem;
-        border: 1px solid var(--text);
+        border: 0.1rem solid var(--text);
     }
 }
 
@@ -376,6 +400,14 @@ picture {
     display: flex;
     flex-direction: column; 
     width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-image: linear-gradient(
+        rgba(248, 247, 237, 0.6), 
+        rgba(248, 247, 237, 0.6)
+    ), 
+    url(../images/IMG_8347.PNG);
+    
 
     & #skills-list {
         display: grid;
@@ -383,7 +415,7 @@ picture {
         justify-content: center;
         grid-template-columns: 1fr 1fr 1fr;
         grid-auto-rows: minmax(min-content, max-content);
-        gap: 0.5rem;
+        gap: 2rem;
         padding: 0;
 
         & .skill-item {
@@ -391,10 +423,10 @@ picture {
             flex-direction: column;
             justify-content: center;
             align-items: center; 
-            padding: 2rem 0;
-            /* background-color: var(--text-alt); */
-            /* color: var(--primary); */
-            /* border: 1px solid var(--text-alt); */
+            padding: 2rem 1rem;
+            background-color: rgba(247, 247, 242, 0.6);
+            box-shadow: var(--shadow);
+            border: 0.1rem solid var(--text-alt);
 
             & .skill-logo {
                 width: 4rem;
@@ -431,6 +463,9 @@ picture {
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
+        border: 0.1rem solid var(--text);
+        box-shadow: var(--shadow);
+        padding: 1rem;
     }
 
     & div {
@@ -439,10 +474,16 @@ picture {
         align-items: baseline;
     }
 
+    & article {
+        margin-top: 1rem;
+    }
+
     & iframe {
         align-self: center;
         height: 90vh;
         width: 90vw;
+        border: 0.1rem solid var(--text-alt);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     }
 }
 
@@ -453,54 +494,15 @@ picture {
         padding-top: 0.5rem;
         text-decoration: none;
         color: var(--text);
+
         &:hover {
             text-decoration: underline;
             color: var(--text);
         }
     }
 
-    & #contact-list {
-        display: grid;
-        align-items: center;
-        justify-content: center;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-auto-rows: minmax(min-content, max-content);
-        gap: 0rem;
-        padding: 0;
-        margin: 5rem auto 0 auto;
-
-        & .contact-item {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center; 
-            padding: 1rem;
-            /* border: 1px solid var(--text-alt); */
-
-            &:hover {
-                background-color: var(--text);
-                color: var(--primary);
-
-                & a {
-                    color: var(--primary);
-                }
-            }
-
-            & .contact-logo {
-                width: 4rem;
-                height: 4rem;
-            }
-
-            & a {
-                font-size: 1.2rem;
-                margin-top: 0.5rem;
-                text-decoration: none;
-            }
-        }
-    }
-
     & form {
-        border: 1px solid var(--text-alt);
+        border: 0.1rem solid var(--text-alt);
         background-color: var(--accent);
         padding: 2.5rem;
 
@@ -525,14 +527,15 @@ picture {
             }
 
             & label {
-                font-size: 1.2rem;
+                font-size: 1.4rem;
                 margin-bottom: 0.5rem;
                 font-family: var(--font-heading);
                 color: var(--primary);
+                font-weight: 600;
             }
 
             & input, textarea {
-                border: 1px solid var(--primary);
+                border: 0.1rem solid var(--primary);
                 border-bottom: 1px solid var(--primary);
                 padding: 0.75rem 0.5rem;
                 font-family: var(--font-body);
@@ -546,12 +549,16 @@ picture {
                 resize: vertical;
             }
         }
-        
+
+        & output {
+            color: var(--primary);
+        }
+    
         & #send-message {
             width: 100%;
             background-color: var(--text);
             color: var(--primary);
-            border: 1px solid var(--text);
+            border: 0.1rem solid var(--text);
             transition: transform 0.2s ease-out;
 
             &:hover {
@@ -564,15 +571,55 @@ picture {
 }
 
 footer {
-    border-top: 1px solid var(--text);
-    padding: 1rem;
+    font-weight: 600;
+    border-top: 0.1rem solid var(--text);
+    padding: 0 5rem;
     width: 100%;
-    background-color: var(--primary);
+    background-position: center;
+    background-size: cover;
+    background-image: linear-gradient(
+        rgba(248, 247, 237, 0.7), 
+        rgba(248, 247, 237, 0.7)
+    ),
+    url(../images/IMG_6986.jpg);
 
-    & p {
-        margin: 1rem 5rem;
-        font-size: 1.2rem;
-        color: var(--text);
+    & .horizontal {
+        justify-content: space-between;
+        gap: 0;
+
+        & p {
+            font-size: 1.2rem;
+            color: var(--text);
+        }
+
+        & #contact-list {
+            margin: 0;
+            padding: 1rem 0;
+            & .contact-item {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+                align-items: flex-end; 
+                padding: 1rem 0 1rem 1rem;
+                gap: 0.5rem;
+                
+
+                & .contact-logo {
+                    width: 2rem;
+                    height: 2rem;
+                }
+
+                & a {
+                    font-size: 1.2rem;
+                    margin-top: 0.5rem;
+                    text-decoration: none;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
     }
 }
 
