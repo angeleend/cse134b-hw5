@@ -1,14 +1,14 @@
 :root {
     --font-heading: 'Archivo Narrow', 'Inter', 'Avenir Next', Helvetica Neue, Arial, sans-serif;
     --font-body: 'General Sans', 'Inter', 'Gill Sans', 'Open Sans', Verdana, sans-serif;
-    --seashell: #f8f7ed;
+    --porcelain: #F7F7F2;
     --black: #121113;
     --brown: #1D120B;
-    --mint: #bbdccf;
-    --forest: #26654C;
+    --wisteria: #C2B3E3;
+    --dusk: #445271;
 
-    --primary: var(--seashell);
-    --accent: var(--forest);
+    --primary: var(--porcelain);
+    --accent: var(--dusk);
     --text: var(--brown);
     --text-alt: var(--black);
 }
@@ -16,13 +16,22 @@
 * {
     box-sizing: border-box;
     font-size-adjust: from-font;
+    scroll-behavior: smooth;
 }
 
 body.dark-mode {
     --primary: var(--black);
-    --accent: var(--mint);
-    --text: var(--seashell);
-    --text-alt: var(--seashell);
+    --accent: var(--wisteria);
+    --text: var(--porcelain);
+    --text-alt: var(--porcelain);
+
+    & #landing {
+        background-image: linear-gradient(
+        rgba(18, 17, 19, 0.6), 
+        rgba(18, 17, 19, 0.6)
+    ), 
+    url(../images/IMG_6913.jpg);
+    }
 }
 
 body {
@@ -44,7 +53,7 @@ h1 {
 h2 {
     font-size: 3rem;
     margin: 1.5rem 0;
-    color: var(--accent);
+    /* color: var(--accent); */
 }
 
 h3 {
@@ -61,7 +70,7 @@ p, a {
     font-size: 1.5rem;
 }
 
-a { color: var(--accent); }
+a { color: var(--text); }
 
 time {
     font-size: 1.5rem;
@@ -97,7 +106,7 @@ button {
 
 header {
     display: flex;
-    padding: 1.75rem 5rem;
+    padding: 1.5rem 5rem;
     position: fixed; 
     top: 0;
     left: 0; 
@@ -116,16 +125,14 @@ header {
 
         & a {
             text-decoration: none;
-            color: var(--text);
             font-size: 1.2rem;
+            padding: 0.2rem;
 
             &:hover {
-                text-decoration: underline;
-                color: var(--text-alt);
-            }
-
-            &:visited {
-                color: var(--accent);
+                text-decoration: none;
+                color: var(--primary);
+                background-color: var(--text-alt);
+                
             }
         }
 
@@ -134,7 +141,6 @@ header {
             padding: 0;
             margin: 0;         
             gap: 1rem; 
-
             font-size: 1.2rem;
             list-style: none; 
 
@@ -151,12 +157,10 @@ header {
             line-height: 0;
             letter-spacing: 0.1rem;
 
-            &:visited {
-                color: var(--text);
-            }
-
             &:hover {
                 text-decoration: none;
+                background-color: transparent;
+                color: var(--text);
             }
 
         }
@@ -179,6 +183,7 @@ header {
             color: var(--primary);
             height: fit-content;
             width: fit-content;
+            padding: 0.5rem 1rem;  
 
         & h1 {
             font-size: 2rem;
@@ -187,10 +192,13 @@ header {
 
         & button {
             height: auto;
+            background-color: var(--primary);
+            color: var(--text);
+            margin: 1.75rem 0;
 
             &:hover {
-                background-color: var(--primary);
-                color: var(--text);
+                background-color: var(--text);
+                color: var(--primary);
             }
         }
     }
@@ -225,6 +233,24 @@ section {
 /* --- LANDING SECTION --- */
 #landing {
     height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-image: linear-gradient(
+        rgba(248, 247, 237, 0.6), 
+        rgba(248, 247, 237, 0.6)
+    ), 
+    url(../images/IMG_6902.jpg);
+    
+    & #skip  { 
+        background-color: var(--text-alt);
+        border: 1px solid var(--primary);
+        color: var(--primary);
+        padding: 0.5rem;
+        margin: 0;
+        width: 10rem;
+        text-align: center;
+        text-decoration: none;
+    }
 }
 
 /* --- PROJECTS SECTION --- */
@@ -357,7 +383,7 @@ picture {
         justify-content: center;
         grid-template-columns: 1fr 1fr 1fr;
         grid-auto-rows: minmax(min-content, max-content);
-        gap: 1.5rem;
+        gap: 0.5rem;
         padding: 0;
 
         & .skill-item {
@@ -365,12 +391,14 @@ picture {
             flex-direction: column;
             justify-content: center;
             align-items: center; 
-            padding: 1rem;
+            padding: 2rem 0;
+            /* background-color: var(--text-alt); */
+            /* color: var(--primary); */
             /* border: 1px solid var(--text-alt); */
 
             & .skill-logo {
-                width: 6rem;
-                height: 6rem;
+                width: 4rem;
+                height: 4rem;
             }
         }
     }
@@ -385,6 +413,17 @@ picture {
     & img {
         width: auto;
         max-height: 100%;
+    }
+
+    & a {
+        text-decoration: none;
+        color: var(--text);
+        padding: 0 0.2rem;
+
+        &:hover {
+            background-color: var(--accent);
+            color: var(--primary);
+        }
     }
 
     & .horizontal {
