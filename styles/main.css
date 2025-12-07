@@ -137,7 +137,7 @@ header {
     top: 0;
     left: 0; 
     right: 0;
-    width: auto; 
+    width: 100%; 
     background-color: var(--primary);
     z-index: 10;
 
@@ -165,7 +165,8 @@ header {
         & ul {
             display: flex; 
             padding: 0;
-            margin: 0;         
+            margin: 0;     
+            margin-right: auto;    
             gap: 1rem; 
             font-size: 1.2rem;
             list-style: none; 
@@ -182,6 +183,7 @@ header {
             font-size: 2rem; 
             line-height: 0;
             letter-spacing: 0.1rem;
+            margin-left: auto;
 
             &:hover {
                 text-decoration: none;
@@ -432,8 +434,7 @@ picture {
             border: 0.1rem solid var(--text-alt);
 
             &:hover progress {
-                /* opacity: 0; */
-                dsiplay: none;
+                display: none;
             }
 
             &:hover .skill-desc {
@@ -457,13 +458,12 @@ picture {
                 width: 100%;
                 height: 100%;
                 
-                transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+                transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
                 
                 background-color: var(--accent); 
                 color: var(--primary); 
                 padding: 1rem;
-                box-sizing: border-box; 
-                font-size: 1.1rem;
+
             }
         }
     }
